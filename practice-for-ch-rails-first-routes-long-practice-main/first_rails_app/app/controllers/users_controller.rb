@@ -7,21 +7,22 @@ class UsersController < ApplicationController
 
     def create
         begin
-            # debugger
-            parameters = params.require(:user).permit(:name, :email)
-            user_instance = User.new(parameters)
-        # replace the `user_attributes_here` with the actual attribute keys
+            user_instance = User.new(user_params)
             user_instance.save!
         rescue => exception
-
-            render json: exception.message
+            render json: exception.message if user_instance.nil?
+            render json: user_instance.errors.full_messages, status: :unprocessable_entity
         else 
             render json: user_instance
         end
     end
 
+    def user_params
+        params.require(:user).permit(:name, :email)
+    end
+
     def show
-        puts params
+        render json: User.find_by(id: params[:id])
     end
 
 end
