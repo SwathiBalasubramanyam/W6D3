@@ -25,4 +25,14 @@ class UsersController < ApplicationController
         render json: User.find_by(id: params[:id])
     end
 
+    def update
+        user = User.update(params[:id], user_params)
+        redirect_to user_url(user)
+    end
+
+    def destroy
+        User.destroy(params[:id])
+        redirect_to users_url
+    end
+
 end
