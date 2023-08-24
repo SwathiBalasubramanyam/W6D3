@@ -11,7 +11,10 @@ ApplicationRecord.transaction do
 
     User.connection.reset_pk_sequence!(:users)
 
-    User.create!(name: 'Shannon', email: 'millar.shan@gmail.com')
-    User.create!(name: 'SB', email: 'sb@gmail.com')
+    u1 = User.create!(username: 'Shannon')
+    u2 = User.create!(username: 'SB')
+    u3 = User.create!(username: 'MA')
+
+    
 
 end
