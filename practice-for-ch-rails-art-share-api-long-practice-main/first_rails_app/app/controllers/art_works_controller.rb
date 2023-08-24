@@ -10,14 +10,10 @@ class ArtWorksController < ApplicationController
 
     def create
         art_work = ArtWork.new(art_work_params)
-        begin
-            if art_work.save!
-                render json: art_work, status: :created
-            else
-                render json: art_work.errors.full_messages, status: :unprocessable_entity
-            end
-        rescue => exception
-            render json: exception.message, status: :unprocessable_entity
+        if art_work.save
+            render json: art_work, status: :created
+        else
+            render json: art_work.errors.full_messages, status: :unprocessable_entity
         end
     end
 

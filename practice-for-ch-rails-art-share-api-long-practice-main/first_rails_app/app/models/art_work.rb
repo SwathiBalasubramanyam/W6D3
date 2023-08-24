@@ -1,5 +1,5 @@
 class ArtWork < ApplicationRecord
-    validates :title, uniqueness: { scope: :artist_id, message: 'should be unique'}
+    validates :title, uniqueness: { scope: :artist_id, message: 'and artist_id should be unique'}
 
     belongs_to :artist,
         foreign_key: :artist_id,
