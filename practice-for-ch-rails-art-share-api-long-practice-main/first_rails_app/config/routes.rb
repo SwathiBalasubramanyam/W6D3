@@ -32,10 +32,15 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :update, :destroy, :create]
   resources :art_works, only: [:show, :update, :destroy, :create]
   resources :art_work_shares, only: [:create, :destroy]
-
+  resources :comments, only: [:create, :destroy]
 
   resources :users do
     resources :art_works, only: :index
+    resources :comments, only: :index
+  end
+
+  resources :art_works do
+    resources :comments, only: :index
   end
 
 end
