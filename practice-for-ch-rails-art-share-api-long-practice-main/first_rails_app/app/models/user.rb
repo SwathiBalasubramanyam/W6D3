@@ -16,4 +16,10 @@ class User < ApplicationRecord
         through: :has_access_to,
         source: :art_work
 
+    has_many :comments,
+        foreign_key: :author_id,
+        class_name: :Comment,
+        dependent: :destroy,
+        inverse_of: :author
+
 end
