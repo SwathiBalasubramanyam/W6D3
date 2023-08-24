@@ -30,13 +30,13 @@ class ArtWorksController < ApplicationController
     def destroy
         art_work = ArtWork.find(params[:id])
         art_work.destroy
-        render json: art_work, status: :destroyed
+        render json: art_work
     end
 
     private
     def art_work_params
         begin
-            params.require(:art_work).permit(:artist_id, :title, :image_url)
+            params.require(:art_work).permit(:artist_id, :title, :image_url)   
         rescue => exception
             render json: exception.message, status: :unprocessable_entity
         end
