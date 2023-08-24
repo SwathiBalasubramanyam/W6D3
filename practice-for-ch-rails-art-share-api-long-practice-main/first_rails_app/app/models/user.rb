@@ -22,6 +22,13 @@ class User < ApplicationRecord
         dependent: :destroy,
         inverse_of: :author
 
+    has_many :likes,
+        foreign_key: :liker_id,
+        class_name: :Like,
+        dependent: :destroy,
+        inverse_of: :liker
+
+
     def self.users_by_username(username)
         self.where("username LIKE '%#{username}%' ")
     end

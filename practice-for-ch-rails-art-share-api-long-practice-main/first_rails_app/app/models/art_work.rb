@@ -20,6 +20,8 @@ class ArtWork < ApplicationRecord
         class_name: :Comment,
         dependent: :destroy
 
+    has_many :likes, as: :likeable
+
 
     def self.artworks_for_user_id(user_id)
         self

@@ -40,7 +40,11 @@ Rails.application.routes.draw do
   end
 
   resources :art_works do
-    # resources :comments, only: :index
+    resources :likes, only: :index
+  end
+
+  resources :comments do
+    resources :likes, only: :index
   end
 
 end

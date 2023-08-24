@@ -8,6 +8,8 @@ class Comment < ApplicationRecord
         foreign_key: :art_work_id,
         class_name: :ArtWork
 
+    has_many :likes, as: :likeable
+
     def self.comments_for_user_id(user_id)
         Comment
             .joins(:author)

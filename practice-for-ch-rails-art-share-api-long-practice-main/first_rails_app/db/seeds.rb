@@ -7,10 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do
+    Like.destroy_all
+    Comment.destroy_all
     ArtWorkShare.destroy_all
     ArtWork.destroy_all
     User.destroy_all
 
+    Like.connection.reset_pk_sequence!(:likes)
+    Comment.connection.reset_pk_sequence!(:comments)
     ArtWorkShare.connection.reset_pk_sequence!(:art_work_shares)
     ArtWork.connection.reset_pk_sequence!(:art_works)
     User.connection.reset_pk_sequence!(:users)
@@ -36,5 +40,11 @@ ApplicationRecord.transaction do
     c3 = Comment.create!(art_work_id: 1, author_id:3 , body: 'Awesome!!')
     c4 = Comment.create!(art_work_id: 2, author_id:1 , body: 'Wonderful!!')
     c5 = Comment.create!(art_work_id: 1, author_id:1 , body: 'Thankyou all !!')
+
+
+    l1 = Like.create!(likeable_id:1, likeable_type: :ArtWork, liker_id:1)
+    l2 = Like.create!(likeable_id:2, likeable_type: :Comment, liker_id:2)
+    l3 = Like.create!(likeable_id:3, likeable_type: :ArtWork, liker_id:3)
+    l4 = Like.create!(likeable_id:4, likeable_type: :Comment, liker_id:3)
 
 end
