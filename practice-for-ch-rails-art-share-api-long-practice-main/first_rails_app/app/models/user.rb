@@ -22,4 +22,8 @@ class User < ApplicationRecord
         dependent: :destroy,
         inverse_of: :author
 
+    def self.users_by_username(username)
+        self.where("username LIKE '%#{username}%' ")
+    end
+
 end

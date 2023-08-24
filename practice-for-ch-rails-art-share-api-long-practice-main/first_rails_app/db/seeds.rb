@@ -30,4 +30,11 @@ ApplicationRecord.transaction do
     as4 = ArtWorkShare.create!(art_work_id: a3.id, viewer_id: u1.id)
     as5 = ArtWorkShare.create!(art_work_id: a3.id, viewer_id: u3.id)
 
+
+    c1 = Comment.create!(art_work_id: 1, author_id:2 , body: 'Wonderful!!')
+    c2 = Comment.create!(art_work_id: 2, author_id:3 , body: 'Fanatstic!!')
+    c3 = Comment.create!(art_work_id: 1, author_id:3 , body: 'Awesome!!')
+    c4 = Comment.create!(art_work_id: 2, author_id:1 , body: 'Wonderful!!')
+    c5 = Comment.create!(art_work_id: 1, author_id:1 , body: 'Thankyou all !!')
+
 end

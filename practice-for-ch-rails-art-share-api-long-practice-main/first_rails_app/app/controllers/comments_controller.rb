@@ -15,8 +15,11 @@ class CommentsController < ApplicationController
     end
 
     def index
-        params[:user_id] ? comments = Comment.comments_for_user_id(params[:user_id]) : comments = Comment.comments_for_art_work_id(params[:art_work_id])
-        render json: comments
+        if params[:user_id] or params[:art_work_id]
+            render json: params[:user_id] ? Comment.comments_for_user_id(params[:user_id]) : Comment.comments_for_art_work_id(params[:art_work_id])
+        else
+            render json: "user_id or art_work_id needs to be specified", status: :unprocessable_entity
+        end
     end
 
     private
