@@ -13,12 +13,8 @@ class UsersController < ApplicationController
             render json: exception.message if user_instance.nil?
             render json: user_instance.errors.full_messages, status: :unprocessable_entity
         else 
-            render json: user_instance
+            render json: user_instance, status: :created
         end
-    end
-
-    def user_params
-        params.require(:user).permit(:name, :email)
     end
 
     def show
@@ -33,8 +29,15 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        User.destroy(params[:id])
-        redirect_to users_url
+        user = User.find(params[:id])
+        user.destroy(params[:id])
+        render json: user, status: :destroyed
+    end
+
+    private
+
+    def user_params
+        params.require(:user).permit(:username)
     end
 
 end

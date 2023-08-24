@@ -10,7 +10,7 @@ class ArtWork < ApplicationRecord
         class_name: :ArtWorkShare,
         dependent: :destroy
 
-    has_many :users_shared,
+    has_many :shared_viewers,
         through: :accessible_from,
         source: :viewer
 end
