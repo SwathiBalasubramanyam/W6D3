@@ -1,11 +1,7 @@
 class ArtWorksController < ApplicationController
 
     def index
-        query_res = ArtWork
-                        .left_joins(:shared_viewers)
-                        .where("users.id = #{params[:user_id]} 
-                                or art_works.artist_id = #{params[:user_id]}")
-
+        query_res = ArtWork.artworks_for_user_id(params[:user_id])
         render json: query_res
 
     end
