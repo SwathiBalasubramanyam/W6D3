@@ -18,11 +18,10 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: User.find_by(id: params[:id])
+        render json: User.find(params[:id])
     end
 
     def update
-        debugger
         user = User.find(params[:id])
         user.update(user_params)
         redirect_to user_url(user)
@@ -35,7 +34,6 @@ class UsersController < ApplicationController
     end
 
     private
-
     def user_params
         params.require(:user).permit(:username)
     end
