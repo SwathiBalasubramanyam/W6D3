@@ -36,11 +36,16 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :art_works, only: :index
+    resources :collections, only: [:index, :create]
+    
     # resources :comments, only: :index
   end
 
+
+
   resources :art_works do
     resources :likes, only: :index
+    
   end
 
   resources :comments do

@@ -22,6 +22,10 @@ class ArtWork < ApplicationRecord
 
     has_many :likes, as: :likeable
 
+    has_many :collections,
+        dependent: :destroy,
+        inverse_of: :art_work 
+
 
     def self.artworks_for_user_id(user_id)
         self

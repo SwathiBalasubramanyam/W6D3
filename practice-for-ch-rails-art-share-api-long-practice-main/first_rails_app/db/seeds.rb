@@ -7,12 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do
+    Collection.destroy_all
     Like.destroy_all
     Comment.destroy_all
     ArtWorkShare.destroy_all
     ArtWork.destroy_all
     User.destroy_all
 
+    Collection.connection.reset_pk_sequence!(:collections)
     Like.connection.reset_pk_sequence!(:likes)
     Comment.connection.reset_pk_sequence!(:comments)
     ArtWorkShare.connection.reset_pk_sequence!(:art_work_shares)
@@ -46,5 +48,9 @@ ApplicationRecord.transaction do
     l2 = Like.create!(likeable_id:2, likeable_type: :Comment, liker_id:2)
     l3 = Like.create!(likeable_id:3, likeable_type: :ArtWork, liker_id:3)
     l4 = Like.create!(likeable_id:4, likeable_type: :Comment, liker_id:3)
+
+    col1 = Collection.create!(art_work_id: 1, user_id: 1, name: "my_first")
+    col2 = Collection.create!(art_work_id: 2, user_id: 1, name: "my_first")
+    col3 = Collection.create!(art_work_id: 3, user_id: 2, name: "my_sec")
 
 end

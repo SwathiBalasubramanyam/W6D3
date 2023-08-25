@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_24_234105) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_25_001029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_234105) do
     t.index ["artist_id", "title"], name: "index_art_works_on_artist_id_and_title", unique: true
     t.index ["artist_id"], name: "index_art_works_on_artist_id"
     t.index ["image_url"], name: "index_art_works_on_image_url", unique: true
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.text "name", null: false
+    t.bigint "art_work_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["art_work_id"], name: "index_collections_on_art_work_id"
+    t.index ["name", "user_id", "art_work_id"], name: "index_collections_on_name_and_user_id_and_art_work_id", unique: true
+    t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -66,6 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_234105) do
   add_foreign_key "art_work_shares", "art_works"
   add_foreign_key "art_work_shares", "users", column: "viewer_id"
   add_foreign_key "art_works", "users", column: "artist_id"
+  add_foreign_key "collections", "art_works"
+  add_foreign_key "collections", "users"
   add_foreign_key "comments", "art_works"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "likes", "users", column: "liker_id"
