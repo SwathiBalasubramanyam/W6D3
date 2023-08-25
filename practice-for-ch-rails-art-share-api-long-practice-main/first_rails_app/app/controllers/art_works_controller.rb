@@ -30,6 +30,12 @@ class ArtWorksController < ApplicationController
         art_work.destroy
         render json: art_work
     end
+    
+    def favorite
+        art_work = ArtWork.find_by(id: params[:id], artist_id: params[:user_id])
+        art_work.update(favorite: true)
+        render json: art_work
+    end
 
     private
     def art_work_params

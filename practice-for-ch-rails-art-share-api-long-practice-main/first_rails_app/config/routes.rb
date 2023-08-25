@@ -47,4 +47,7 @@ Rails.application.routes.draw do
     resources :likes, only: :index
   end
 
+  patch '/users/:user_id/art_works/:id', to: 'art_works#favorite'
+  patch '/users/:user_id/art_work_shares/:id', to: 'art_work_shares#favorite'
+
 end

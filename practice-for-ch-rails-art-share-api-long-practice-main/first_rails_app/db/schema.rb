@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_24_221458) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_234105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_221458) do
     t.bigint "viewer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "favorite"
     t.index ["art_work_id", "viewer_id"], name: "index_art_work_shares_on_art_work_id_and_viewer_id", unique: true
     t.index ["art_work_id"], name: "index_art_work_shares_on_art_work_id"
     t.index ["viewer_id"], name: "index_art_work_shares_on_viewer_id"
@@ -30,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_221458) do
     t.bigint "artist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "favorite"
     t.index ["artist_id", "title"], name: "index_art_works_on_artist_id_and_title", unique: true
     t.index ["artist_id"], name: "index_art_works_on_artist_id"
     t.index ["image_url"], name: "index_art_works_on_image_url", unique: true

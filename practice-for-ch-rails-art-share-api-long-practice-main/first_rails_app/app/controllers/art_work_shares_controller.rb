@@ -14,6 +14,12 @@ class ArtWorkSharesController < ApplicationController
         aws.destroy
         render json: aws
     end
+
+    def favorite
+        art_work_share = ArtWorkShare.find_by(art_work_id: params[:id], viewer_id: params[:user_id])
+        art_work_share.update(favorite: true)
+        render json: art_work_share
+    end
     
     private
     def artwork_share_params
